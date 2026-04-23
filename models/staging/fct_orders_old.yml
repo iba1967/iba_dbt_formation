@@ -1,0 +1,55 @@
+models:
+  - name: fct_orders_old
+    latest_version: 1   # version par défaut
+    config:
+      group: finance     # groupe défini dans groups.yml
+      access: public     # public / protected / private
+      contract:
+        enforced: true
+
+    # >>> Contract columns for v1 <<<
+    columns:
+      - name: order_id
+        data_type: varchar
+      - name: location_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: order_total
+        data_type: number
+      - name: tax_paid
+        data_type: number
+      - name: ordered_at
+        data_type: timestamp_ntz
+      - name: customer_name
+        data_type: varchar
+      - name: location_name
+        data_type: varchar
+      - name: tax_rate
+        data_type: number
+      - name: location_opened_at
+        data_type: timestamp_ntz
+      - name: ordered_month
+        data_type: number
+      - name: ordered_day
+        data_type: number
+      - name: ordered_year
+        data_type: number
+
+    versions:
+      # --- Version 1 ---
+      - v: 1
+        config:
+          alias: fct_orders
+
+      # --- Version 2 ---
+      - v: 2
+        columns:
+          - name: order_amount          # nouveau champ en v2
+            data_type: number
+
+          - name: location_opened_at    # type modifié en v2
+            data_type: date
+
+          - include: all                # hérite de toutes les colonnes v1
+            exclude: [order_total]      # supprime order_total (remplacé par order_amount)

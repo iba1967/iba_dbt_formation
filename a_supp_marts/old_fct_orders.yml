@@ -1,0 +1,4 @@
+groups:
+    - name: fct_orders
+         group: finance
+         access: public

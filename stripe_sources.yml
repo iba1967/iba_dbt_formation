@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: stripe
+    database: RAW # remplace par ta base réelle
+    schema: STRIPE # remplace par ton schéma réel
+    tables:
+      - name: payment
+        columns:
+          - name: id
+            tests:
+              - unique:
+                  config:
+                    severity: error
+                    warn_if: "> 10"
+                    error_if: "> 100"
+          - name: paymentmethod
+            tests:
+              - not_null:
+                  where: "status = 'success'"
+
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ["success", "failed", "pending"]
+                  config:
+                    limit: 10
+                    store_failures: true

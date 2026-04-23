@@ -1,0 +1,27 @@
+exposures:
+  - name: orders_data
+    label: orders_data
+    type: notebook
+    maturity: high
+    url: https://tinyurl.com/jaffle-shop-reporting
+    description: 'Exposure for orders metrics'
+    depends_on:
+      - ref('fct_orders')
+      #- metric('order_total') #metric named 'order_total' which was not found
+      #- metric('large_orders') #metric named 'large_orders' which was not found
+      #- metric('cumulative_order_amount_mtd') #metric named 'cumulative_order_amount_mtd' which was not found
+    owner:
+      name: Michael McData
+      email: data@jaffleshop.com
+  
+  - name: customers_data
+    label: customers_data
+    type: notebook
+    maturity: high
+    url: https://tinyurl.com/jaffle-shop-reporting
+    description: 'Exposure for customer metrics'
+    depends_on:
+      - ref('dim_customers')
+    owner: 
+      name: Data Startrek
+      email: operations_manager@enterprise.com
